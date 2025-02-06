@@ -42,7 +42,7 @@ VALIDATE $? "changing directory"
 unzip /tmp/web.zip &>> $LOGFILE
 VALIDATE $? "unzipping web content"
 
-cp /home/centos/roboshop-shell/nginx.config /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
+cp /home/centos/shell/nginx.config /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
 VALIDATE $? "copying nginx config"
 
 systemctl restart nginx &>> $LOGFILE
