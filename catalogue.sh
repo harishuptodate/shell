@@ -35,7 +35,7 @@ dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "installing nodejs"
 
-useradd roboshop &>> $LOGFILE
+id "roboshop" &>/dev/null || useradd roboshop && echo "User 'roboshop' created successfully." &>> $LOGFILE
 
 VALIDATE $? "creating user"
 
