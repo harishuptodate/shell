@@ -1,7 +1,7 @@
 # !/bin/bash
 ID=$(id -u)
 TIMSTAMP=$(date +%F-%H-%M-%S)
-LOGFILE="/tmp/$0-$timestamp.log"
+LOGFILE="/tmp/$0-$TIMSTAMP.log"
 
 if [ $ID -ne 0 ]
 then
@@ -18,6 +18,7 @@ VALIDATE(){
     exit 1
     else
     echo "$2 ... SUCCESS"
+    fi
 }
 
 
