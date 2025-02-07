@@ -1,0 +1,33 @@
+- name: catalogue
+  hosts: 
+  tasks: 
+  - name: disable old nodejs and enable new nodejs
+    ansible.builtin.command: >  # >: This allows you to write a multi-line command in YAML. &&: This ensures that the second command (dnf module enable nodejs:18 -y) only runs if the first command (dnf module disable nodejs -y) succeeds.
+      dnf module disable nodejs -y && dnf module enable nodejs:18 -y
+  
+  - name: install nodejs
+    ansible.builtin.dnf:
+    name: nodejs
+    state: present
+
+  - name: creating user
+    ansible.builtin.user:
+    name: roboshop
+    
+
+  - name: create app directory
+    ansible.builtin.file:
+    path: /app
+    state: directory
+
+  # - name: downloading source code
+  #   ansible.builtin.get_url:
+  #   url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+  #   dest: /app
+
+  - name: downloading source code
+    ansible.builtin.unarchive:
+    src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+    dest: /app
+    remote_src: no
+      
