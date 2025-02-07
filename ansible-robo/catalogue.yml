@@ -1,5 +1,6 @@
 - name: catalogue
-  hosts: 
+  hosts: catalogue
+  become: yes
   tasks: 
   - name: disable old nodejs and enable new nodejs
     ansible.builtin.command: >  # >: This allows you to write a multi-line command in YAML. &&: This ensures that the second command (dnf module enable nodejs:18 -y) only runs if the first command (dnf module disable nodejs -y) succeeds.
@@ -20,14 +21,63 @@
     path: /app
     state: directory
 
-  # - name: downloading source code
+  
+
+  # - name: download catalogue application
   #   ansible.builtin.get_url:
-  #   url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-  #   dest: /app
+  #     url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+  #     dest: /tmp
+
+  # - name: extract catalogue application
+  #   ansible.builtin.unarchive:
+  #     src: /tmp/catalogue.zip
+  #     dest: /app
+  #     remote_src: yes
 
   - name: downloading source code
     ansible.builtin.unarchive:
     src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
     dest: /app
     remote_src: no
-      
+
+
+  - name: install dependencies
+    ansible.builtin.command: npm install
+    args:
+      chdir: /app
+
+  - name: copying catalogue.service file
+    ansible.builtin.copy:
+    src: catalogue.service
+    dest: /etc/yum.repos.d/mongo.repo
+
+
+  - name: daemon reload and start 
+    ansible.builtin.systemd_service:
+    daemon_reload: true
+
+   
+  # let's start after the data is loaded
+
+  - name: copy mongodb repo
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+
+  - name: Install mongo 
+    ansible.builtin.package:
+      name: mongodb-org
+      state: present
+
+  - name: Install mongodb client
+    ansible.builtin.package:
+      name: mongodb-org-shell
+      state: present
+
+  - name: get the categories count
+    ansible.builtin.command:  mongo --host mongodb.daws76s.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+    register: product_count
+
+  - name: print the count
+    ansible.builtin.debug:
+      msg: "product count: {{product_count}}"
