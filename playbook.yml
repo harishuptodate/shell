@@ -1,0 +1,16 @@
+- name: "ping playbook"
+  hosts: web 
+  # become: true
+  tasks: "TO ping the server"
+  - name: "ping"
+    ansible.builtin.ping:
+
+
+
+
+# - name: "Ping playbook"
+#   hosts: web
+#   # become: true
+#   tasks:
+#     - name: "Ping the server"
+#       ansible.builtin.ping:
