@@ -8,18 +8,18 @@
   
   - name: install nodejs
     ansible.builtin.dnf:
-    name: nodejs
-    state: present
+      name: nodejs
+      state: present
 
   - name: creating user
     ansible.builtin.user:
-    name: roboshop
+      name: roboshop
     
 
   - name: create app directory
     ansible.builtin.file:
-    path: /app
-    state: directory
+      path: /app
+      state: directory
 
   
 
@@ -36,9 +36,9 @@
 
   - name: downloading source code
     ansible.builtin.unarchive:
-    src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-    dest: /app
-    remote_src: no
+      src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      dest: /app
+      remote_src: no
 
 
   - name: install dependencies
@@ -48,13 +48,13 @@
 
   - name: copying catalogue.service file
     ansible.builtin.copy:
-    src: catalogue.service
-    dest: /etc/yum.repos.d/mongo.repo
+      src: catalogue.service
+      dest: /etc/yum.repos.d/mongo.repo
 
 
   - name: daemon reload and start 
     ansible.builtin.systemd_service:
-    daemon_reload: true
+      daemon_reload: true
 
    
   # let's start after the data is loaded
