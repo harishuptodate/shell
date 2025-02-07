@@ -2,10 +2,23 @@
   hosts: catalogue
   become: yes
   tasks: 
-  - name: disable old nodejs and enable new nodejs
-    ansible.builtin.command: >  # >: This allows you to write a multi-line command in YAML. &&: This ensures that the second command (dnf module enable nodejs:18 -y) only runs if the first command (dnf module disable nodejs -y) succeeds.
-      dnf module disable nodejs -y && dnf module enable nodejs:18 -y
-  
+  # - name: disable old nodejs and enable new nodejs
+  #   ansible.builtin.command: dnf module disable nodejs -y && dnf module enable nodejs:18 -y
+  - name: Disable old Node.js module
+    ansible.builtin.dnf:
+      name: nodejs
+      state: absent
+      module: yes
+
+  - name: Enable Node.js 18 module
+    ansible.builtin.dnf:
+      name: nodejs:18
+      state: present
+      module: yes
+
+
+
+
   - name: install nodejs
     ansible.builtin.dnf:
       name: nodejs
