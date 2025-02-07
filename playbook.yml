@@ -1,16 +1,16 @@
-- name: "ping playbook"
-  hosts: verey 
-  # become: true
-  tasks: "TO ping the server"
-  - name: "ping"
-    ansible.builtin.ping:
-
-
-
-
-# - name: "Ping playbook"
-#   hosts: web
+# - name: "ping playbook"
+#   hosts: verey 
 #   # become: true
-#   tasks:
-#     - name: "Ping the server"
-#       ansible.builtin.ping:
+#   tasks: "TO ping the server"
+#   - name: "ping"
+#     ansible.builtin.ping:
+
+
+
+
+- name: "Ping playbook"
+  hosts: verey
+  # become: true
+  tasks:
+    - name: "Ping the server"
+      ansible.builtin.ping:
