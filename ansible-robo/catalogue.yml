@@ -4,17 +4,22 @@
   tasks: 
   # - name: disable old nodejs and enable new nodejs
   #   ansible.builtin.command: dnf module disable nodejs -y && dnf module enable nodejs:18 -y
+  # - name: Disable old Node.js module
+  #   ansible.builtin.dnf:
+  #     name: nodejs
+  #     state: absent
+  #     module: yes
+
+  # - name: Enable Node.js 18 module
+  #   ansible.builtin.dnf:
+  #     name: nodejs:18
+  #     state: present
+  #     module: yes
   - name: Disable old Node.js module
-    ansible.builtin.dnf:
-      name: nodejs
-      state: absent
-      module: yes
+    ansible.builtin.command: dnf module disable nodejs -y
 
   - name: Enable Node.js 18 module
-    ansible.builtin.dnf:
-      name: nodejs:18
-      state: present
-      module: yes
+    ansible.builtin.command: dnf module enable nodejs:18 -y
 
 
 
