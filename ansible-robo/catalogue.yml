@@ -2,19 +2,7 @@
   hosts: catalogue
   become: yes
   tasks: 
-  # - name: disable old nodejs and enable new nodejs
-  #   ansible.builtin.command: dnf module disable nodejs -y && dnf module enable nodejs:18 -y
-  # - name: Disable old Node.js module
-  #   ansible.builtin.dnf:
-  #     name: nodejs
-  #     state: absent
-  #     module: yes
-
-  # - name: Enable Node.js 18 module
-  #   ansible.builtin.dnf:
-  #     name: nodejs:18
-  #     state: present
-  #     module: yes
+  
   - name: Disable old Node.js module
     ansible.builtin.command: dnf module disable nodejs -y
 
@@ -41,22 +29,22 @@
 
   
 
-  # - name: download catalogue application
-  #   ansible.builtin.get_url:
-  #     url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-  #     dest: /tmp
+  - name: download catalogue application
+    ansible.builtin.get_url:
+      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      dest: /tmp
 
-  # - name: extract catalogue application
-  #   ansible.builtin.unarchive:
-  #     src: /tmp/catalogue.zip
-  #     dest: /app
-  #     remote_src: yes
-
-  - name: downloading source code
+  - name: extract catalogue application
     ansible.builtin.unarchive:
-      src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+      src: /tmp/catalogue.zip
       dest: /app
-      remote_src: no
+      remote_src: yes
+
+  # - name: downloading source code
+  #   ansible.builtin.unarchive:
+  #     src: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+  #     dest: /app
+  #     remote_src: no
 
 
   - name: install dependencies
