@@ -1,5 +1,5 @@
 - name: mongodb
-  hosts: mongo
+  hosts: 172.31.90.228
   tasks:
   - name: copy mongodb repo
     ansible.builtin.copy:
