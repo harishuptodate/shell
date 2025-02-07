@@ -55,7 +55,7 @@
   - name: copying catalogue.service file
     ansible.builtin.copy:
       src: catalogue.service
-      dest: /etc/yum.repos.d/mongo.repo
+      dest: /etc/systemd/system/catalogue.service
 
 
   - name: daemon reload and start 
