@@ -1,5 +1,5 @@
 - name: "ping playbook"
-  hosts: web 
+  hosts: verey 
   # become: true
   tasks: "TO ping the server"
   - name: "ping"
