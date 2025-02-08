@@ -1,10 +1,10 @@
-MONGODB_HOST: mongodb.daws76s.online # submit your host
-REDIS_HOST: redis.daws76s.online
-MYSQL_HOST: mysql.daws76s.online
-RABBITMQ_HOST: rabbitmq.daws76s.online
-CATALOGUE_HOST: catalogue.daws76s.online
-USER_HOST: user.daws76s.online
-CART_HOST: cart.daws76s.online
-SHIPPING_HOST: shipping.daws76s.online
-PAYMENT_HOST: payment.daws76s.online
+MONGODB_HOST: 172.31.85.19 # submit your host
+REDIS_HOST: 172.31.92.14 
+MYSQL_HOST: 172.31.92.140 
+RABBITMQ_HOST: 172.31.84.35
+CATALOGUE_HOST: 172.31.92.146
+USER_HOST: 172.31.92.38
+CART_HOST: 172.31.88.225
+SHIPPING_HOST: 172.31.91.0
+PAYMENT_HOST: 172.31.84.200 
 DISPATCH_HOST: dispatch.daws76s.online
