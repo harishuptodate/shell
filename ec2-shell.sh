@@ -1,11 +1,11 @@
 SG_ID=sg-018bba7f155ed1384
 AMI=ami-0b4f379183e5706b9
-INSTANCES=("mongo" "web" "catalogue" ) # "redis" "user" "cart" "mysql" "shipping" "rabbitmq" "payment"
+INSTANCES=("mongo" "web" "catalogue" "redis" "user" "cart" "mysql" "shipping" "rabbitmq" "payment") # "redis" "user" "cart" "mysql" "shipping" "rabbitmq" "payment"
 for i in ${INSTANCES[@]}
 do
 if [ $i == "mongo" ] || [ $i == "mysql" ] || [ $i == "rabbitmq" ]
 then 
-    INSTANCE_TYPE="t2.nano"
+    INSTANCE_TYPE="t2.micro"
     else 
     INSTANCE_TYPE="t2.micro"
 fi
